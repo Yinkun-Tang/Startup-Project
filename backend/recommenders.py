@@ -1,35 +1,40 @@
 import pandas as pd
 import numpy as np
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_PATH = BASE_DIR / 'data' / 'processed'
 
 class RecommenderBase:
-    def __init__(self, data_path='../data/processed/', eval_mode=True):
+    def __init__(self, data_path=DATA_PATH, eval_mode=False):
         # Collaborative filtering matrices
-        self.user_item_matrix = pd.read_pickle(data_path + 'user_item_matrix.pkl')
-        self.item_user_matrix = pd.read_pickle(data_path + 'item_user_matrix.pkl')
-        self.item_similarity_matrix = pd.read_pickle(data_path + 'item_similarity_matrix_df.pkl')
-        self.adjusted_item_similarity_matrix = pd.read_pickle(data_path + 'adjusted_item_similarity_matrix_df.pkl')
+        self.user_item_matrix = pd.read_pickle(data_path / 'user_item_matrix.pkl')
+        self.item_user_matrix = pd.read_pickle(data_path / 'item_user_matrix.pkl')
+        self.item_similarity_matrix = pd.read_pickle(data_path / 'item_similarity_matrix_df.pkl')
+        self.adjusted_item_similarity_matrix = pd.read_pickle(data_path / 'adjusted_item_similarity_matrix_df.pkl')
         
         # Content-based matrices
-        self.content_similarity_matrix_one_hot = pd.read_pickle(data_path + 'content_similarity_matrix_one_hot.pkl')
-        self.content_similarity_matrix_tfidf = pd.read_pickle(data_path + 'content_similarity_matrix_tfidf.pkl')
+        self.content_similarity_matrix_one_hot = pd.read_pickle(data_path / 'content_similarity_matrix_one_hot.pkl')
+        self.content_similarity_matrix_tfidf = pd.read_pickle(data_path / 'content_similarity_matrix_tfidf.pkl')
         
         # Popularity data
-        self.popularity = pd.read_pickle(data_path + 'popularity.pkl')
+        self.popularity = pd.read_pickle(data_path / 'popularity.pkl')
         
         # User and movie metadata
-        self.users = pd.read_pickle(data_path + 'users.pkl')
-        self.movies = pd.read_pickle(data_path + 'movies.pkl')
+        self.users = pd.read_pickle(data_path / 'users.pkl')
+        self.movies = pd.read_pickle(data_path / 'movies.pkl')
         
         # User correlation matrix for user-based CF
-        self.user_correlation_matrix = pd.read_pickle(data_path + 'user_correlation_matrix.pkl')
+        self.user_correlation_matrix = pd.read_pickle(data_path / 'user_correlation_matrix.pkl')
         
         if eval_mode:
-            self.user_item_matrix = pd.read_pickle(data_path + 'eval_train_matrix.pkl')
-            self.item_user_matrix = pd.read_pickle(data_path + 'eval_item_user_matrix.pkl')
-            self.item_similarity_matrix = pd.read_pickle(data_path + 'eval_item_similarity_matrix.pkl')
-            self.adjusted_item_similarity_matrix = pd.read_pickle(data_path + 'eval_adjusted_item_similarity_matrix.pkl')
-            self.user_correlation_matrix = pd.read_pickle(data_path + 'eval_user_correlation_matrix.pkl')
-            self.popularity = pd.read_pickle(data_path + 'eval_popularity.pkl')
+            self.user_item_matrix = pd.read_pickle(data_path / 'eval_train_matrix.pkl')
+            self.item_user_matrix = pd.read_pickle(data_path / 'eval_item_user_matrix.pkl')
+            self.item_similarity_matrix = pd.read_pickle(data_path / 'eval_item_similarity_matrix.pkl')
+            self.adjusted_item_similarity_matrix = pd.read_pickle(data_path / 'eval_adjusted_item_similarity_matrix.pkl')
+            self.user_correlation_matrix = pd.read_pickle(data_path / 'eval_user_correlation_matrix.pkl')
+            self.popularity = pd.read_pickle(data_path / 'eval_popularity.pkl')
         
 # User-Based Collaborative Filtering Recommender
 class UserBasedCFRecommender(RecommenderBase):
