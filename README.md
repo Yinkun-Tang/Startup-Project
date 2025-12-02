@@ -19,8 +19,6 @@ Recommendation system has been a popular topic for research in the field of comp
 1. Before any operation, run ```data_preprocessing.py``` under the directory ```./backend```
 2. Under the root directory, run ```uvicorn backend.fast_api.main:app --reload``` to start the backend server
 3. Under the directory ```./frontend``` run command ```npm run dev``` to start the frontend interface
-4. The frontend interface should look like the following:
-![Frontend Interface Example](./FrontendExample.png)
 
 ## Usage - Methodologies Evaluation and Experiment
 
