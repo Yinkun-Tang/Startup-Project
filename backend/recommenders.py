@@ -158,7 +158,7 @@ class ContentBasedRecommender(RecommenderBase):
 
 # Hybrid Recommender
 class HybridRecommender(RecommenderBase):
-    def __init__(self, alpha=0.5, top_k=10, candidate_factor=5):
+    def __init__(self, alpha=0.8, top_k=10, candidate_factor=5):
         super().__init__()
         self.alpha = alpha
         self.top_k = top_k

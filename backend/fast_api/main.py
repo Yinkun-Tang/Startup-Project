@@ -1,5 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+import pandas as pd
+import random
 from backend.recommenders import (
     UserBasedCFRecommender, 
     ItemBasedCFRecommender, 
@@ -22,25 +24,36 @@ item_cf = ItemBasedCFRecommender(top_k=10)
 content_cb = ContentBasedRecommender(top_k=10)
 hybrid = HybridRecommender(top_k=10, alpha=0.8)
 
+# Assume backend server runs with provided command in README
+movies = pd.read_pickle('data/processed/movies.pkl').set_index('MovieID')
+users = pd.read_pickle('data/processed/users.pkl')["UserID"].tolist()
+
 @app.get("/")
 async def root():
     return {"message": "Recommender API is running..."}
 
-@app.get("/recommend/{user_id}")
-async def recommend(user_id: int):
-    try:
-        return {
-            "user_based_cf": user_cf.recommend(user_id),
-            "item_based_cf": item_cf.recommend(user_id),
-            "content_based": content_cb.recommend(user_id),
-            "hybrid": hybrid.recommend(user_id)
-        }
-    except KeyError:
-        return {
-            "user_based_cf": [],
-            "item_based_cf": [],
-            "content_based": [],
-            "hybrid": []
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+@app.get("/recommend")
+async def recommend(user_id: int = None, random_user: bool = False):
+    if random_user or user_id is None:
+        user_id = random.choice(users)
+    
+    recommendations = {
+        "UserBasedCF": user_cf.recommend(user_id),
+        "ItemBasedCF": item_cf.recommend(user_id),
+        "ContentBased": content_cb.recommend(user_id),
+        "Hybrid": hybrid.recommend(user_id)
+    }
+    
+    recs_detailed = {}
+    for key, mids in recommendations.items():
+        recs_detailed[key] = []
+        for mid in mids:
+            recs_detailed[key].append({
+                "MovieID": mid, 
+                "Title": movies.loc[mid]["Title"],
+                "Genres": movies.loc[mid]["GenresStr"]
+            })
+    return {
+        "UserID": user_id,
+        "Recommendations": recs_detailed
+    }

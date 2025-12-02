@@ -4,18 +4,23 @@ Recommendation system has been a popular topic for research in the field of comp
 
 ## Prerequisites
 
-1. Create Python virtual environment and install all packages according to ```requirement.txt```.
-2. Download MovieLens 1M Dataset from [MovieLen | GroupLens](https://grouplens.org/datasets/movielens/)
-3. Unzipped downloaded dataset and extract ```ml-1m``` folder to the directory ```./data/raw```
+1. Install the latest version of Node.js
+2. Create Python virtual environment and install all packages according to ```requirement.txt```
+3. Run ```npm install``` under the directory ```./frontend``` to install frontend dependencies
+4. Download MovieLens 1M Dataset from [MovieLen | GroupLens](https://grouplens.org/datasets/movielens/)
+5. Unzipped downloaded dataset and extract ```ml-1m``` folder to the directory ```./data/raw```
 
 ## Installation
 
 1. Clone or download this repository.
 
-## Usage - Interactive Dashboard
+## Usage - Interactive Interface
 
 1. Before any operation, run ```data_preprocessing.py``` under the directory ```./backend```
 2. Under the root directory, run ```uvicorn backend.fast_api.main:app --reload``` to start the backend server
+3. Under the directory ```./frontend``` run command ```npm run dev``` to start the frontend interface
+4. The frontend interface should look like the following:
+![Frontend Interface Example](./FrontendExample.png)
 
 ## Usage - Methodologies Evaluation and Experiment
 
@@ -25,5 +30,4 @@ Recommendation system has been a popular topic for research in the field of comp
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
