@@ -35,6 +35,11 @@ The system supports an independent evaluation pipeline enabling offline experime
 2. Under the root directory, run ```uvicorn backend.fast_api.main:app --reload``` to start the backend server
 3. Under the directory ```./frontend``` run command ```npm run dev``` to start the frontend interface
 
+or
+
+1. Before any operation, run ```data_preprocessing.py``` under the directory ```./backend```
+2. Under the root directory, run ```./start.sh``` to perform local environment cleaning, dependencies installation, and start both backend server and frontend interface. If the frontend fails to open automatically, please click the address presented in the terminal to enter the interface.
+
 ## Usage - Methodologies Evaluation and Experiment
 
 1. Before any operation, run ```data_preprocessing.py``` and ```evaluation_data_preprocessing.py``` under the directory ```./backend```
