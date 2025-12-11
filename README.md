@@ -42,10 +42,9 @@ or
 
 ## Usage - Methodologies Evaluation and Experiment
 
-1. Before any operation, run ```data_preprocessing.py``` and ```evaluation_data_preprocessing.py``` under the directory ```./backend```
-2. For evaluation purposes, activate ```eval_mode``` for recommenders defined in ```recommenders.py``` under the directory ```./backend```
-3. Parameter choices and alternative preprocessing or computation strategies can be explored and adjusted in ```evaluation_config.json```
-4. After configuration setup and all required datasets generation, run ```evaluation_pipeline.py``` under the directory ```./backend``` to check configured model(s) performance.
+1. Parameter choices and alternative preprocessing or computation strategies can be explored and adjusted in ```evaluation_config.json```
+2. When configuration is adjusted and confirmed, run ```data_preprocessing.py``` and ```evaluation_data_preprocessing.py``` under the directory ```./backend```
+3. After data preprocessing completes, run ```evaluation_pipeline.py``` under the directory ```./backend``` to check configured model(s) performance
 
 ## Contributing
 
